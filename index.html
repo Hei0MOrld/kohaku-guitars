@@ -291,6 +291,19 @@ nav.scrolled{
 }
 .faq-item p b{color:var(--ink);font-weight:700;}
 
+/* ---------- FILLED PHOTOS ---------- */
+.ph{position:relative;overflow:hidden;}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-slot.ph{aspect-ratio:1/1;}
+.gal-slot.ph{aspect-ratio:4/5;padding:0;}
+.about-photo.ph{padding:0;}
+.ph-cap{
+  position:absolute;left:0;bottom:0;
+  background:rgba(42,29,12,.82);color:#fff;
+  font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  padding:.35rem .85rem;border-top-right-radius:8px;
+}
+
 /* ---------- CONTACT ---------- */
 .contact{background:var(--paper);}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:0 0 2.6rem;}
@@ -428,8 +441,8 @@ footer{background:var(--walnut-2);color:#b9a37e;padding:3rem 1.6rem 2.4rem;}
 
     <div class="work-card reveal">
       <div class="work-photos">
-        <!-- PHOTO: images/pu_before.jpg に差し替え --><div class="photo-slot"><span class="ico">📷</span><b>Before</b>交換前の写真</div>
-        <!-- PHOTO: images/pu_after.jpg に差し替え --><div class="photo-slot"><span class="ico">📷</span><b>After</b>交換後の写真</div>
+        <div class="photo-slot ph"><img src="images/pu_before.jpg" alt="交換前：新品のSeymour Duncanピックアップ"><span class="ph-cap">Before</span></div>
+        <div class="photo-slot ph"><img src="images/pu_after.jpg" alt="交換後：ボディに取り付けたピックアップ"><span class="ph-cap">After</span></div>
       </div>
       <div class="work-body">
         <span class="tag">実績 01</span>
@@ -460,9 +473,9 @@ footer{background:var(--walnut-2);color:#b9a37e;padding:3rem 1.6rem 2.4rem;}
       </div>
       <p class="craft-copy">定番回路（ブースト／ファズ／オーバードライブ）をベースに、部品の値を調整して音を作り込む。筐体は黒柿や杢などの希少な木材を樹脂で固め、真鍮パーツと組み合わせる。量産ペダルには絶対に出せない、一台限りの木目と音。制作の過程はYouTube・Instagramで公開しています。</p>
       <div class="gallery">
-        <!-- PHOTO: images/pedal_1.jpg --><div class="gal-slot"><span class="ico">🎛</span>木製筐体<br>（黒柿・杢×樹脂）</div>
-        <!-- PHOTO: images/pedal_2.jpg --><div class="gal-slot"><span class="ico">🎛</span>基板・内部<br>配線</div>
-        <!-- PHOTO: images/pedal_3.jpg --><div class="gal-slot"><span class="ico">🎛</span>真鍮ノブ・<br>金属加工</div>
+        <div class="gal-slot ph"><img src="images/pedal_1.jpg" alt="木製筐体のハンドメイドエフェクター"></div>
+        <div class="gal-slot ph"><img src="images/pedal_2.jpg" alt="回路の試作・ブレッドボード"></div>
+        <div class="gal-slot ph"><img src="images/pedal_3.jpg" alt="ポット・基板・ジャックなどの内部パーツ"></div>
       </div>
       <div class="mat-row">
         <span class="mat">黒柿・杢 × エポキシ樹脂</span>
@@ -483,9 +496,9 @@ footer{background:var(--walnut-2);color:#b9a37e;padding:3rem 1.6rem 2.4rem;}
       </div>
       <p class="craft-copy">入門機を手に入れ、塗装を剥がし、木地を染め、金属を焼き錆びさせる。長い年月を経たような風合いを、一本ずつ手作業で。エイジド加工というより、その個体だけの柄であり個性です。</p>
       <div class="gallery">
-        <!-- PHOTO: images/bass_1.jpg --><div class="gal-slot"><span class="ico">🎸</span>琥 壱型<br>全体</div>
-        <!-- PHOTO: images/bass_2.jpg --><div class="gal-slot"><span class="ico">🎸</span>レリック加工<br>ボディ</div>
-        <!-- PHOTO: images/bass_3.jpg --><div class="gal-slot"><span class="ico">🎸</span>ヘッド・<br>金属パーツ</div>
+        <div class="gal-slot ph"><img src="images/bass_1.jpg" alt="レリック加工したジャズベース 琥 壱型"></div>
+        <div class="gal-slot ph"><img src="images/bass_2.jpg" alt="組み込み途中のベースボディ"></div>
+        <div class="gal-slot ph"><img src="images/bass_3.jpg" alt="ブリッジ・ピックアップまわりのアップ"></div>
       </div>
     </div>
 
@@ -500,7 +513,7 @@ footer{background:var(--walnut-2);color:#b9a37e;padding:3rem 1.6rem 2.4rem;}
 <section class="section about" id="about">
   <div class="wrap">
     <div class="about-grid">
-      <!-- PHOTO: images/about.jpg --><div class="about-photo reveal"><span class="ico">📷</span>作業風景 or<br>本人の写真</div>
+      <div class="about-photo ph reveal"><img src="images/about.jpg" alt="ポットの配線作業をしているところ"></div>
       <div class="about-body reveal">
         <span class="eyebrow">中の人</span>
         <h2>富岡から、<br>高崎の軽音に通ってた。</h2>
