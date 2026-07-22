@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>琥珀guitars — 富岡でギター・ベースを直す / つくる</title>
+<meta name="description" content="群馬県富岡市。軽音の高校生の楽器を、部品代だけで直します。セットアップ・弦高調整・フレット磨き・ピックアップ交換。ハンドメイドのレリックベース製作も。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Old+Mincho:wght@400;600;700;900&family=Yomogi&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF3E2;
+  --paper-2:#F6EAD0;
+  --ink:#2A1D0C;
+  --ink-soft:#5A462B;
+  --muted:#8A7451;
+  --amber:#B26A12;
+  --amber-glow:#E39A2A;
+  --amber-pale:rgba(227,154,42,0.15);
+  --walnut:#3A2712;
+  --walnut-2:#2A1C0C;
+  --leaf:#6E8B39;
+  --leaf-deep:#54702A;
+  --line:rgba(61,41,20,0.16);
+  --line-lite:rgba(245,233,207,0.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-weight:400;
+  line-height:1.85;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.85rem 1.4rem;
+  transition:background .3s,box-shadow .3s,border-color .3s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(251,243,226,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 2px 20px rgba(58,39,18,0.06);
+}
+.nav-logo{
+  font-family:'Zen Old Mincho',serif;font-weight:900;
+  font-size:1.35rem;letter-spacing:.06em;color:var(--amber);
+  text-decoration:none;line-height:1;
+}
+.nav-logo span{font-size:.72rem;letter-spacing:.28em;color:var(--muted);font-family:'Zen Kaku Gothic New';font-weight:500;}
+.nav-links{display:flex;gap:1.5rem;align-items:center;list-style:none;}
+.nav-links a{
+  text-decoration:none;font-size:.78rem;letter-spacing:.12em;
+  color:var(--ink-soft);font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--amber);}
+.nav-cta{
+  background:var(--leaf);color:#fff!important;padding:.5rem 1.05rem;
+  border-radius:999px;font-weight:700;letter-spacing:.06em;
+  transition:background .2s,transform .2s;
+}
+.nav-cta:hover{background:var(--leaf-deep);transform:translateY(-1px);}
+.nav-toggle{display:none;}
+@media(max-width:720px){
+  .nav-links{display:none;}
+  .nav-cta{display:inline-block;font-size:.72rem;padding:.45rem .85rem;}
+  .nav-links.mobile-show{
+    display:flex;flex-direction:column;position:absolute;top:100%;right:0;left:0;
+    background:var(--paper);border-bottom:1px solid var(--line);padding:1rem 1.4rem;gap:1rem;
+  }
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:7rem 1.6rem 3rem;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:38%;left:60%;transform:translate(-50%,-50%);
+  width:min(80vw,640px);height:min(80vw,640px);
+  background:radial-gradient(circle,rgba(227,154,42,.42) 0%,rgba(227,154,42,.12) 42%,transparent 70%);
+  filter:blur(8px);pointer-events:none;z-index:0;
+  animation:breathe 7s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}}
+.hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto;width:100%;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.7rem;letter-spacing:.26em;font-weight:700;
+  color:var(--amber);text-transform:uppercase;margin-bottom:1.4rem;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--amber);}
+.hero h1{
+  font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;
+  font-size:clamp(3rem,11vw,6.2rem);line-height:1.02;letter-spacing:.01em;
+  color:var(--ink);margin-bottom:1.3rem;
+}
+.hero h1 .amber{color:var(--amber);}
+.hero-sub{
+  font-size:clamp(1rem,2.4vw,1.22rem);color:var(--ink-soft);
+  max-width:30em;font-weight:500;margin-bottom:2.2rem;line-height:1.9;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.85rem 1.7rem;border-radius:999px;font-weight:700;
+  text-decoration:none;font-size:.95rem;letter-spacing:.04em;
+  transition:transform .2s,background .2s,box-shadow .2s;
+}
+.btn-primary{background:var(--leaf);color:#fff;box-shadow:0 6px 18px rgba(110,139,57,.28);}
+.btn-primary:hover{background:var(--leaf-deep);transform:translateY(-2px);box-shadow:0 10px 24px rgba(110,139,57,.34);}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px);}
+
+/* symptom scribbles */
+.symptoms{
+  position:relative;z-index:1;max-width:1080px;margin:3.2rem auto 0;width:100%;
+}
+.symptoms-line{
+  font-family:'Zen Old Mincho',serif;font-weight:600;
+  font-size:1.05rem;color:var(--ink-soft);margin-top:1.2rem;
+}
+.symptoms-line b{color:var(--amber);font-weight:700;}
+.scribbles{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;}
+.scribble{
+  font-family:'Yomogi',cursive;font-size:clamp(1rem,2.6vw,1.5rem);
+  color:var(--ink);opacity:.85;white-space:nowrap;
+}
+.scribble:nth-child(odd){transform:rotate(-2.5deg);}
+.scribble:nth-child(even){transform:rotate(1.8deg);color:var(--walnut);}
+.scribble::before{content:'“';color:var(--amber);opacity:.6;}
+.scribble::after{content:'”';color:var(--amber);opacity:.6;}
+
+/* ---------- SECTION BASE ---------- */
+.section{padding:5.5rem 1.6rem;}
+.wrap{max-width:1080px;margin:0 auto;}
+.sec-head{margin-bottom:2.8rem;}
+.sec-head h2{
+  font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;
+  font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;color:var(--ink);margin-top:.5rem;
+}
+.sec-head p{color:var(--ink-soft);font-size:1.02rem;max-width:36em;margin-top:1rem;font-weight:500;}
+
+/* ---------- REPAIR (直す) ---------- */
+.repair{background:var(--paper);}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:3rem;}
+.tier{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.6rem 1.5rem;
+  position:relative;transition:transform .2s,box-shadow .2s;
+}
+.tier:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(58,39,18,.1);}
+.tier.hot{border-color:var(--leaf);background:linear-gradient(180deg,#fff 0%,#f6faee 100%);}
+.tier-flag{
+  position:absolute;top:-11px;left:1.4rem;background:var(--leaf);color:#fff;
+  font-size:.66rem;font-weight:700;letter-spacing:.1em;padding:.28rem .8rem;border-radius:999px;
+}
+.tier h3{font-size:1.12rem;font-weight:700;margin-bottom:.3rem;}
+.tier .price{font-family:'Zen Old Mincho',serif;font-weight:700;font-size:1.7rem;color:var(--amber);line-height:1.2;margin:.4rem 0 .1rem;}
+.tier.hot .price{color:var(--leaf-deep);}
+.tier .price small{font-size:.85rem;color:var(--muted);font-family:'Zen Kaku Gothic New';font-weight:500;}
+.tier .note{font-size:.86rem;color:var(--ink-soft);margin-top:.7rem;line-height:1.7;}
+
+.can-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:2.6rem;}
+.can{
+  display:flex;align-items:center;gap:.7rem;background:var(--paper-2);
+  border-radius:12px;padding:.9rem 1.1rem;font-weight:500;font-size:.96rem;
+}
+.can .dot{width:8px;height:8px;border-radius:50%;background:var(--leaf);flex-shrink:0;}
+
+.cant{
+  background:#fff;border:1px dashed var(--muted);border-radius:16px;
+  padding:1.5rem 1.7rem;margin-bottom:3rem;
+}
+.cant h4{font-size:.95rem;font-weight:700;color:var(--walnut);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;}
+.cant h4 span{font-size:1.1rem;}
+.cant p{font-size:.92rem;color:var(--ink-soft);line-height:1.8;}
+
+/* work / 実績 */
+.work-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);background:#fff;
+}
+.work-photos{display:grid;grid-template-columns:1fr 1fr;}
+.photo-slot{
+  aspect-ratio:1/1;background:var(--paper-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);font-size:.78rem;text-align:center;gap:.4rem;border-right:1px solid var(--line);
+}
+.photo-slot:last-child{border-right:none;}
+.photo-slot .ico{font-size:1.6rem;opacity:.5;}
+.photo-slot b{color:var(--ink-soft);font-weight:700;}
+.work-body{padding:1.8rem;display:flex;flex-direction:column;justify-content:center;}
+.work-body .tag{font-size:.72rem;letter-spacing:.2em;color:var(--amber);font-weight:700;margin-bottom:.7rem;}
+.work-body h3{font-family:'Zen Old Mincho',serif;font-size:1.25rem;font-weight:700;margin-bottom:.6rem;line-height:1.5;}
+.work-body p{font-size:.92rem;color:var(--ink-soft);}
+
+/* ---------- BUILD (つくる) — warm 明朝 voice ---------- */
+.build{background:linear-gradient(180deg,var(--paper-2) 0%,#F1E3C4 100%);color:var(--ink);position:relative;}
+.build .eyebrow{color:var(--amber);}
+.build .eyebrow::before{background:var(--amber);}
+.build h2{font-family:'Zen Old Mincho',serif;color:var(--ink);font-weight:700;}
+.build-lead{
+  font-family:'Zen Old Mincho',serif;font-weight:400;font-size:1.08rem;line-height:2.1;
+  color:var(--ink-soft);max-width:40em;margin-top:1rem;
+}
+.craft-block{
+  border-top:1px solid var(--line);padding-top:2.2rem;margin-top:2.4rem;
+}
+.craft-block:first-of-type{border-top:none;padding-top:0;margin-top:2.4rem;}
+.craft-head{display:flex;align-items:baseline;gap:1.1rem;margin-bottom:1rem;}
+.craft-index{
+  font-family:'Zen Old Mincho',serif;font-weight:700;font-size:1.6rem;
+  color:var(--amber);opacity:.5;line-height:1;flex-shrink:0;
+}
+.craft-head h3{font-family:'Zen Old Mincho',serif;font-weight:700;font-size:1.5rem;color:var(--ink);line-height:1.4;}
+.craft-sub{font-size:.82rem;color:var(--muted);letter-spacing:.02em;margin-top:.2rem;}
+.craft-copy{
+  font-family:'Zen Old Mincho',serif;font-weight:400;font-size:1rem;line-height:2.05;
+  color:var(--ink-soft);max-width:42em;
+}
+.mat-row{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.4rem;}
+.mat{
+  border:1px solid var(--amber);border-radius:999px;
+  padding:.4rem 1rem;font-size:.8rem;color:var(--amber);
+  font-family:'Zen Kaku Gothic New';font-weight:500;background:rgba(227,154,42,.06);
+}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.6rem 0 1.4rem;}
+.gal-slot{
+  aspect-ratio:4/5;border-radius:14px;background:#fff;
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);font-size:.78rem;text-align:center;gap:.5rem;
+}
+.gal-slot .ico{font-size:1.7rem;opacity:.6;color:var(--amber);}
+.gal-slot.wide{grid-column:span 1;}
+.build-foot{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between;}
+.build-foot p{color:var(--ink-soft);font-size:.92rem;}
+.btn-amber{background:var(--amber);color:#fff;}
+.btn-amber:hover{background:var(--amber-glow);transform:translateY(-2px);}
+
+/* ---------- ABOUT (中の人) ---------- */
+.about{background:var(--paper-2);}
+.about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:2.4rem;align-items:center;}
+.about-photo{
+  aspect-ratio:4/5;border-radius:18px;background:#fff;border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);font-size:.8rem;text-align:center;gap:.5rem;
+}
+.about-photo .ico{font-size:2rem;opacity:.5;}
+.about-body h2{margin-bottom:1.1rem;}
+.about-body p{color:var(--ink-soft);font-size:1rem;line-height:2;margin-bottom:1rem;font-weight:500;}
+.about-body p b{color:var(--ink);font-weight:700;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem;}
+.about-tags span{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:.4rem .9rem;font-size:.8rem;color:var(--ink-soft);font-weight:500;
+}
+
+/* ---------- FAQ ---------- */
+.faq{background:var(--paper);}
+.faq-list{display:flex;flex-direction:column;gap:.8rem;}
+.faq-item{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:0 1.4rem;overflow:hidden;transition:border-color .2s,box-shadow .2s;
+}
+.faq-item[open]{border-color:var(--amber);box-shadow:0 8px 22px rgba(178,106,18,.08);}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:1.15rem 0;
+  font-weight:700;font-size:1rem;color:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:'＋';color:var(--amber);font-size:1.2rem;flex-shrink:0;transition:transform .25s;
+}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item p{
+  padding:0 0 1.25rem;color:var(--ink-soft);font-size:.94rem;line-height:1.9;font-weight:500;
+}
+.faq-item p b{color:var(--ink);font-weight:700;}
+
+/* ---------- CONTACT ---------- */
+.contact{background:var(--paper);}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:0 0 2.6rem;}
+.step{position:relative;padding:1.5rem 1.3rem;background:#fff;border:1px solid var(--line);border-radius:16px;}
+.step .num{font-family:'Zen Old Mincho',serif;font-size:2rem;font-weight:700;color:var(--amber-pale);line-height:1;position:absolute;top:1rem;right:1.2rem;}
+.step .num-real{font-family:'Zen Old Mincho',serif;font-size:1.1rem;font-weight:700;color:var(--amber);}
+.step h4{font-size:1.02rem;font-weight:700;margin:.5rem 0 .5rem;}
+.step p{font-size:.88rem;color:var(--ink-soft);line-height:1.75;}
+.contact-cards{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem;}
+.cc{border-radius:18px;padding:1.8rem;display:flex;flex-direction:column;gap:.6rem;}
+.cc.line{background:var(--leaf);color:#fff;}
+.cc.mail{background:#fff;border:1px solid var(--line);}
+.cc .lbl{font-size:.72rem;letter-spacing:.18em;font-weight:700;opacity:.9;}
+.cc .val{font-family:'Zen Old Mincho',serif;font-size:1.5rem;font-weight:700;line-height:1.2;}
+.cc.mail .val{color:var(--amber);font-size:1.15rem;word-break:break-all;}
+.cc .sub{font-size:.82rem;opacity:.9;}
+.cc a.btn{margin-top:.6rem;align-self:flex-start;}
+.cc.line a.btn{background:#fff;color:var(--leaf-deep);}
+.cc.mail a.btn{background:var(--amber);color:#fff;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--walnut-2);color:#b9a37e;padding:3rem 1.6rem 2.4rem;}
+.foot-wrap{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:flex-start;}
+.foot-brand{font-family:'Zen Old Mincho',serif;font-weight:900;font-size:1.5rem;color:var(--amber-glow);letter-spacing:.05em;}
+.foot-brand + p{font-size:.85rem;margin-top:.4rem;}
+.foot-links{display:flex;flex-direction:column;gap:.55rem;}
+.foot-links a{text-decoration:none;font-size:.9rem;color:#cdb98f;transition:color .2s;}
+.foot-links a:hover{color:var(--amber-glow);}
+.foot-copy{width:100%;max-width:1080px;margin:2.2rem auto 0;padding-top:1.4rem;border-top:1px solid var(--line-lite);font-size:.78rem;color:#8a765a;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:820px){
+  .tiers,.can-grid,.gallery,.steps{grid-template-columns:1fr;}
+  .can-grid{grid-template-columns:1fr 1fr;}
+  .work-card{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .contact-cards{grid-template-columns:1fr;}
+  .section{padding:4rem 1.3rem;}
+}
+@media(max-width:520px){
+  .can-grid{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:1fr 1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="nav-logo">琥珀<span>guitars</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="メニュー">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#repair">直す</a></li>
+    <li><a href="#build">つくる</a></li>
+    <li><a href="#about">中の人</a></li>
+    <li><a href="#faq">Q&amp;A</a></li>
+    <li><a href="#contact" class="nav-cta">LINEで相談</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">群馬・富岡 &nbsp;/&nbsp; ギター &amp; ベース</span>
+    <h1>楽器、<span class="amber">直します。</span></h1>
+    <p class="hero-sub">富岡の軽音の高校生の一本を、部品代だけで。<br>プロの工房じゃなくて、ちょっと詳しい先輩くらいの距離で。</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">LINEで相談する</a>
+      <a href="#repair" class="btn btn-ghost">何ができる? ↓</a>
+    </div>
+  </div>
+
+  <div class="symptoms hero-inner">
+    <div class="scribbles">
+      <span class="scribble">弦がビビる</span>
+      <span class="scribble">音が出たり出なかったり</span>
+      <span class="scribble">ジャックがガリガリ</span>
+      <span class="scribble">弦高が高くて弾きにくい</span>
+      <span class="scribble">チューニングすぐ狂う</span>
+      <span class="scribble">ノブが取れた</span>
+    </div>
+    <p class="symptoms-line">— そういうの、<b>だいたい直せます。</b></p>
+  </div>
+</header>
+
+<!-- REPAIR -->
+<section class="section repair" id="repair">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Repair / 直す</span>
+      <h2>まず、気軽に見せて。</h2>
+      <p>楽器屋に持っていくほどじゃないかも、って症状こそ相談してほしい。ほとんどは調整か部品交換で直る。高校生・学生は部品代だけでいい。工賃はもらいません。</p>
+    </div>
+
+    <div class="tiers reveal">
+      <div class="tier hot">
+        <span class="tier-flag">一番おすすめ</span>
+        <h3>高校生・学生</h3>
+        <div class="price">部品代だけ<br><small>工賃 0円</small></div>
+        <p class="note">弦代やパーツ代の実費のみ。「自分も昔、お金がなくて楽器を直せなかったから」というのが理由です。</p>
+      </div>
+      <div class="tier">
+        <h3>一般の人</h3>
+        <div class="price">相場の半額<small>くらい</small></div>
+        <p class="note">例：セットアップ 2,000円〜。近所で気軽に頼める分、料金は抑えめにします。</p>
+      </div>
+      <div class="tier">
+        <h3>一緒に直す</h3>
+        <div class="price">タダ〜投げ銭</div>
+        <p class="note">隣で教えながら一緒に作業。次から自分でメンテできるようになります。</p>
+      </div>
+    </div>
+
+    <div class="can-grid reveal">
+      <div class="can"><span class="dot"></span>弦交換・セットアップ</div>
+      <div class="can"><span class="dot"></span>弦高・オクターブ調整</div>
+      <div class="can"><span class="dot"></span>フレット磨き</div>
+      <div class="can"><span class="dot"></span>ピックアップ交換</div>
+      <div class="can"><span class="dot"></span>配線・ポット/ジャック交換</div>
+      <div class="can"><span class="dot"></span>電池ボックス・電装まわり</div>
+    </div>
+
+    <div class="cant reveal">
+      <h4><span>⚠</span> いま出来ないこと（正直に）</h4>
+      <p>ネック折れの補修・リフレット（フレット全打ち替え）・塗装の塗り直しは、専門の道具と経験がいるので無理には受けません。必要なときは高崎の工房を紹介します。安全に直せる範囲だけ、責任を持ってやります。</p>
+    </div>
+
+    <div class="work-card reveal">
+      <div class="work-photos">
+        <!-- PHOTO: images/pu_before.jpg に差し替え --><div class="photo-slot"><span class="ico">📷</span><b>Before</b>交換前の写真</div>
+        <!-- PHOTO: images/pu_after.jpg に差し替え --><div class="photo-slot"><span class="ico">📷</span><b>After</b>交換後の写真</div>
+      </div>
+      <div class="work-body">
+        <span class="tag">実績 01</span>
+        <h3>高崎の母校の後輩のベース、<br>ピックアップ交換</h3>
+        <p>この前、通ってた高崎の高校の軽音部の後輩から頼まれて、ベースのピックアップを交換しました。音がしっかり出るようになって一安心。こういう小さな一本を、これから増やしていきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD -->
+<section class="section build" id="build">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Build / つくる</span>
+      <h2>時を、木と樹脂に閉じ込める。</h2>
+      <p class="build-lead">黒柿や杢といった希少な木材にエポキシ樹脂を合わせ、木そのものの表情を美しさに変える。琥珀のように時間を封じ込めた筐体を、金属加工と組み合わせて一台ずつ手で作っています。直すだけじゃなく、ゼロからも作る。それが琥珀guitarsの本筋です。</p>
+    </div>
+
+    <!-- エフェクター（本命） -->
+    <div class="craft-block reveal">
+      <div class="craft-head">
+        <span class="craft-index">01</span>
+        <div>
+          <h3>エフェクター</h3>
+          <p class="craft-sub">Handmade boutique pedals — 木製筐体 × カスタムボイシング</p>
+        </div>
+      </div>
+      <p class="craft-copy">定番回路（ブースト／ファズ／オーバードライブ）をベースに、部品の値を調整して音を作り込む。筐体は黒柿や杢などの希少な木材を樹脂で固め、真鍮パーツと組み合わせる。量産ペダルには絶対に出せない、一台限りの木目と音。制作の過程はYouTube・Instagramで公開しています。</p>
+      <div class="gallery">
+        <!-- PHOTO: images/pedal_1.jpg --><div class="gal-slot"><span class="ico">🎛</span>木製筐体<br>（黒柿・杢×樹脂）</div>
+        <!-- PHOTO: images/pedal_2.jpg --><div class="gal-slot"><span class="ico">🎛</span>基板・内部<br>配線</div>
+        <!-- PHOTO: images/pedal_3.jpg --><div class="gal-slot"><span class="ico">🎛</span>真鍮ノブ・<br>金属加工</div>
+      </div>
+      <div class="mat-row">
+        <span class="mat">黒柿・杢 × エポキシ樹脂</span>
+        <span class="mat">工房での金属加工</span>
+        <span class="mat">回路のカスタムボイシング</span>
+        <span class="mat">一台限りの一点物</span>
+      </div>
+    </div>
+
+    <!-- レリックベース（副） -->
+    <div class="craft-block reveal">
+      <div class="craft-head">
+        <span class="craft-index">02</span>
+        <div>
+          <h3>レリックベース「琥 壱型」</h3>
+          <p class="craft-sub">Hand relic bass — 既製の一本を、使い込まれた相棒へ</p>
+        </div>
+      </div>
+      <p class="craft-copy">入門機を手に入れ、塗装を剥がし、木地を染め、金属を焼き錆びさせる。長い年月を経たような風合いを、一本ずつ手作業で。エイジド加工というより、その個体だけの柄であり個性です。</p>
+      <div class="gallery">
+        <!-- PHOTO: images/bass_1.jpg --><div class="gal-slot"><span class="ico">🎸</span>琥 壱型<br>全体</div>
+        <!-- PHOTO: images/bass_2.jpg --><div class="gal-slot"><span class="ico">🎸</span>レリック加工<br>ボディ</div>
+        <!-- PHOTO: images/bass_3.jpg --><div class="gal-slot"><span class="ico">🎸</span>ヘッド・<br>金属パーツ</div>
+      </div>
+    </div>
+
+    <div class="build-foot reveal">
+      <p>ペダル・レリックベースの販売はメルカリにて。オーダー・カスタムの相談はLINEから。</p>
+      <a href="#contact" class="btn btn-amber">製作を相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <!-- PHOTO: images/about.jpg --><div class="about-photo reveal"><span class="ico">📷</span>作業風景 or<br>本人の写真</div>
+      <div class="about-body reveal">
+        <span class="eyebrow">中の人</span>
+        <h2>富岡から、<br>高崎の軽音に通ってた。</h2>
+        <p>高校時代、ベースを弾いてました。<b>富岡から高崎の高校まで通って、軽音部にいた</b>。楽器はしょっちゅう調子が悪くなるのに、直すお金も、近くに頼める人もいなかった。</p>
+        <p>いまは大学で情報を学びながら、<b>個人の工房で金属加工から木工まで</b>手を動かして楽器をいじってます。あの頃の自分みたいな高校生の一本を、直せたらと思ってやってます。</p>
+        <div class="about-tags">
+          <span>富岡出身</span><span>元・高崎の軽音部</span><span>ベース弾き</span>
+          <span>木工・金属加工</span><span>情報科めざす大学生</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ / 受け渡し -->
+<section class="section faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Q&amp;A / 頼む前に</span>
+      <h2>不安なところ、先に答えます。</h2>
+      <p>初めてだと聞きにくいことこそ、ここで解決してから相談してほしい。</p>
+    </div>
+
+    <div class="faq-list reveal">
+      <details class="faq-item" open>
+        <summary>本当に高校生はタダなの?</summary>
+        <p>工賃（作業代）は0円です。かかるのは弦やピックアップなど<b>交換する部品の実費だけ</b>。作業前に「これくらいかかるよ」と必ず先に伝えます。勝手に高い部品を使うことはしません。</p>
+      </details>
+      <details class="faq-item">
+        <summary>受け渡しはどこで? 郵送もできる?</summary>
+        <p>高崎・富岡あたりなら<b>駅や学校の近くで手渡し</b>できます。会うのが難しければ<b>郵送でもOK</b>。送料の負担も含めて、LINEで相談しながら決めましょう。未成年の人は、保護者に一言伝えてから連絡してくれると安心です。</p>
+      </details>
+      <details class="faq-item">
+        <summary>作業中に楽器が壊れたりしない?</summary>
+        <p>作業前に楽器の状態を一緒に確認して、<b>「どこまで直すか」を合意してから</b>手を付けます。安全に直せる範囲だけを引き受けるので、無理な作業はしません。もし途中で難しいと分かったら、正直に伝えて中断します。</p>
+      </details>
+      <details class="faq-item">
+        <summary>どれくらいで直る?</summary>
+        <p>弦交換やセットアップなら、その場〜数日。部品を取り寄せる場合は少し時間がかかります。急ぎのときはLINEでそう言ってくれれば、できる範囲で優先します。</p>
+      </details>
+      <details class="faq-item">
+        <summary>初心者で、症状をうまく説明できないんだけど…</summary>
+        <p>それで大丈夫。「なんか音が変」「弾きにくい」くらいのざっくりでOKです。<b>楽器の写真を送ってくれる</b>と話が早い。何が起きてるかは、見ればだいたい分かります。</p>
+      </details>
+      <details class="faq-item">
+        <summary>楽器を持ってないパーツだけ・改造の相談もできる?</summary>
+        <p>できます。ピックアップやポットの交換、配線の変更などパーツ選びから相談に乗れます。ペダルやレリック加工など「つくる」側の相談も同じくLINEからどうぞ。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Contact / 相談する</span>
+      <h2>まずLINEで、症状を送って。</h2>
+      <p>「これって直る?」の一言でOK。症状と、できれば楽器の写真を送ってくれると早いです。返信はだいたい2〜3日以内。</p>
+    </div>
+
+    <div class="steps reveal">
+      <div class="step">
+        <span class="num">01</span>
+        <span class="num-real">STEP 01</span>
+        <h4>LINEで相談</h4>
+        <p>症状と写真を送る。「弦がビビる」くらいのざっくりでも大丈夫。</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <span class="num-real">STEP 02</span>
+        <h4>見てもらう</h4>
+        <p>実際に楽器を見て、直るか・いくらかかるかを先に伝えます。</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <span class="num-real">STEP 03</span>
+        <h4>直す</h4>
+        <p>部品代だけで作業。その場でサッと直ることもあります。</p>
+      </div>
+    </div>
+
+    <div class="contact-cards reveal">
+      <div class="cc line">
+        <span class="lbl">MAIN — 公式LINE</span>
+        <span class="val">@258iffsy</span>
+        <span class="sub">ID検索で友だち追加。ここからが一番早いです。</span>
+        <a href="https://line.me/R/ti/p/@258iffsy" class="btn">LINEで友だち追加</a>
+      </div>
+      <div class="cc mail">
+        <span class="lbl">またはメール</span>
+        <span class="val">napiafsc1881@gmail.com</span>
+        <span class="sub">LINEが苦手な人はこちらへ。</span>
+        <a href="mailto:napiafsc1881@gmail.com" class="btn">メールを送る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-wrap">
+    <div>
+      <div class="foot-brand">琥珀guitars</div>
+      <p>群馬県富岡市 — ギター・ベースの修理 / 製作</p>
+    </div>
+    <div class="foot-links">
+      <a href="#repair">楽器を直す</a>
+      <a href="#build">エフェクター・製作</a>
+      <a href="#about">中の人について</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">相談する</a>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.instagram.com/kohaku_guitars/" target="_blank" rel="noopener">Instagram @kohaku_guitars</a>
+      <a href="https://www.tiktok.com/@KOHKO" target="_blank" rel="noopener">TikTok @KOHKO</a>
+      <a href="https://line.me/R/ti/p/@258iffsy" target="_blank" rel="noopener">公式LINE @258iffsy</a>
+    </div>
+  </div>
+  <div class="foot-copy">© 2026 琥珀guitars — Tomioka, Gunma. 富岡の楽器を、直す・つくる。</div>
+</footer>
+
+<script>
+// nav solidify
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+// mobile menu
+document.getElementById('navToggle').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('mobile-show');
+});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.remove('mobile-show');
+}));
+// scroll reveal
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

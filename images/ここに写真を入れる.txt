@@ -1,0 +1,7 @@
+このフォルダに写真を入れて、index.html のプレースホルダーと差し替えます。
+
+推奨ファイル名：
+- pu_before.jpg / pu_after.jpg   … 実績01 ピックアップ交換 Before/After
+- pedal_1.jpg / pedal_2.jpg / pedal_3.jpg … エフェクター（木製筐体・内部・ノブ）
+- bass_1.jpg / bass_2.jpg / bass_3.jpg     … レリックベース 琥 壱型
+- about.jpg                       … 中の人（作業風景 or 本人）
